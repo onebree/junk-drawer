@@ -3,5 +3,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     provider :developer, :fields => [:nickname], :uid_field => :nickname
   end
 
-  provider :reddit, ENV["REDDIT_KEY"], ENV["REDDIT_SECRET"], :scope => ["save", "identity", "history"]
+  previder :reddit, ENV["REDDIT_KEY"], ENV["REDDIT_SECRET"], :scope => "save,identity,history"
 end
