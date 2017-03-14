@@ -6,6 +6,8 @@ class SessionsController < ApplicationController
   end
 
   def create
+    Rails.logger.info auth_hash
+
     user = User.find_or_create_by(
       :provider => auth_hash["provider"],
       :uid      => auth_hash["uid"],
