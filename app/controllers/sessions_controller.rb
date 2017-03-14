@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     user = User.find_or_create_by(
       :provider => auth_hash["provider"],
       :uid      => auth_hash["uid"],
-      :nickname => auth_hash["info"]["nickname"]
+      :name     => auth_hash["info"]["name"]
     )
 
     session["user_id"] = user.id
