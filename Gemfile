@@ -38,7 +38,6 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'slim'
 gem 'bootstrap-sass'
-gem 'dotenv'
 gem 'omniauth-oauth2', '~> 1.3.1'
 gem 'omniauth-reddit', :github => 'jackdempsey/omniauth-reddit', :branch => 'master'
 gem 'redd'
