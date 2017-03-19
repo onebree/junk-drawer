@@ -17,7 +17,7 @@ For instructions on setting up a working dev environment:
 
 [Setup wiki article](https://github.com/onebree/junk-drawer/wiki/setup)
 
-Note: These instructions are for Ubuntu 16.
+Note: These instructions are for Ubuntu 16.x.
 
 These instructions cover:
 
@@ -29,7 +29,20 @@ These instructions cover:
 Once everything is setup, you can clone this project:
 
 ```bash
-$ git clone git@github.com:onebree/junk-drawer.git
+$ git clone https://github.com/onebree/junk-drawer.git
+```
+
+`cd` into the project, and install all necessary gems:
+
+```bash
+$ bundle install
+```
+
+Now setup your test and development databases:
+
+```bash
+$ rails db:create
+$ rails db:migrate
 ```
 
 ## Running
