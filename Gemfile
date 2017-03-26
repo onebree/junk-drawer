@@ -42,6 +42,7 @@ gem 'omniauth-oauth2', '~> 1.3.1'
 gem 'omniauth-reddit', :github => 'jackdempsey/omniauth-reddit', :branch => 'master'
 gem 'redd'
 gem 'textacular'
+gem 'font-awesome-sass'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
