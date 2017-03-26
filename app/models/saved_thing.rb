@@ -4,12 +4,16 @@ class SavedThing < ApplicationRecord
 
   before_save :set_type
 
+  def self.searchable_columns
+    [:body, :link_title]
+  end
+
   def name
     "#{kind}_#{reddit_id}"
   end
 
-  def self.searchable_columns
-    [:body, :link_title]
+  def subreddit_url
+    "//reddit.com/r/#{subreddit}"
   end
 
   private

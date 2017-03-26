@@ -1,0 +1,11 @@
+.panel.panel-default
+  .panel-heading
+    = thing.link_title
+    .pull-right
+      = link_to icon("external-link fw"), thing.link_url
+  .panel-body
+    = sanitize(thing.body)
+    small
+      ul.list-inline
+        li= link_to "r/#{thing.subreddit}", thing.subreddit_url
+        li= link_to "permalink", thing.permalink
