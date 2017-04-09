@@ -39,6 +39,10 @@ class ApplicationController < ActionController::Base
     )
     
     session = Redd::Models::Session.new(client)
+    
+    Rails.logger.info session.me.name
+    
+    session
   end
   
   def create_developer_session
