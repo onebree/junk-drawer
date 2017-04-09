@@ -8,6 +8,22 @@ class SavedThing < ApplicationRecord
     [:body, :link_title]
   end
 
+  def author
+    payload["author"]
+  end
+
+  def score
+    payload["score"]
+  end
+
+  def subreddit
+    payload["subreddit"]
+  end
+
+  def kind
+    payload["kind"]
+  end
+
   def name
     "#{kind}_#{reddit_id}"
   end

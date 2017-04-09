@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170326222659) do
+ActiveRecord::Schema.define(version: 20170409184519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,15 +18,9 @@ ActiveRecord::Schema.define(version: 20170326222659) do
   create_table "saved_things", force: :cascade do |t|
     t.string   "type"
     t.string   "reddit_id"
-    t.string   "subreddit"
-    t.text     "body"
-    t.text     "link_id"
-    t.text     "link_title"
-    t.text     "link_url"
-    t.text     "permalink"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "kind"
+    t.json     "payload"
   end
 
   create_table "user_saved_things", force: :cascade do |t|
