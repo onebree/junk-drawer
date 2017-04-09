@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
     
     session = Redd::Models::Session.new(client)
     
-    Rails.logger.info session.me.name
+    Rails.logger.info session
     
     session
   end
