@@ -1,0 +1,48 @@
+doctype html
+html
+  head
+    title junk drawer for reddit
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="viewport" content="width=device-width, initial-scale=1"
+
+    = csrf_meta_tags
+    
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+body
+  - if current_page?(home_path)
+    = yield
+  - else
+    nav.navbar.navbar-default
+      .container
+        .row
+          .col-md-1
+          .col-md-10
+            .navbar-header
+              button.navbar-toggle.collapsed data-target="#navbar-collapse" data-toggle="collapse" type="button" 
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+              a.navbar-brand href=home_path junk drawer
+            #navbar-collapse.collapse.navbar-collapse
+              ul.nav.navbar-nav
+                li.active
+                  = link_to "saved things", saved_things_path
+              ul.nav.navbar-nav.navbar-right
+                li.dropdown
+                  a.dropdown-toggle data-toggle="dropdown" href="#" role="button"
+                    = current_user.name
+                    span.caret
+                  ul.dropdown-menu
+                    li
+                      = link_to "Sign out", logout_path
+          .col-md-1
+              
+    .container
+      .row
+        .col-md-1
+        .col-md-10
+          = yield
+        .col-md-1
