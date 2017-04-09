@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       :name     => auth_hash["info"]["name"]
     )
     
-    token = auth_hash.credentials.tokens || "developer"
+    token = auth_hash.credentials.token || "developer"
     
     user.update_attribute(:access_token, token)
 
