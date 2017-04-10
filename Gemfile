@@ -38,8 +38,6 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'slim'
 gem 'bootstrap-sass'
-gem 'omniauth-oauth2', '~> 1.3.1'
-gem 'omniauth-reddit', :github => 'jackdempsey/omniauth-reddit', :branch => 'master'
 gem 'redd'
 gem 'textacular'
 gem 'font-awesome-sass'

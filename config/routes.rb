@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   
   get "/collect" => "saved_things#collect", :as => :collect_saved_things
 
-  get "/auth/logout" => "sessions#destroy", :as => :logout
-  get "/auth/failure" => "sessions#failure"
-  match "/auth/:provider/callback" => "sessions#create", :via => [:get, :post]
+  get "/auth/logout"   => "sessions#destroy",  :as => :logout
+  get "/auth/failure"  => "sessions#failure",  :as => :failure
+  get "/redirect" => "sessions#redirect", :as => :redirect
   
   resources :saved_things, :only => [:index]
 

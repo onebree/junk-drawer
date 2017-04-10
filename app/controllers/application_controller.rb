@@ -9,12 +9,8 @@ class ApplicationController < ActionController::Base
   USERS = { ENV["JUNK_DRAWER_USERNAME"] => ENV["JUNK_DRAWER_PASSWORD"] }
 
   def auth_required
-    unless current_user.present?
-      if Rails.env.production?
-        redirect_to "/auth/reddit"
-      else
-        redirect_to "/auth/developer"
-      end
+    unless current_user.present? && current_auth.present?
+      redirect_to "/auth/reddit"
     end
   end
 
@@ -22,7 +18,12 @@ class ApplicationController < ActionController::Base
     User.find_by(:id => session["user_id"])
   end
 
+  def current_auth
+    request.env["redd.session"]
+  end
+
   helper_method :current_user
+  helper_method :current_auth
 
   private
 
