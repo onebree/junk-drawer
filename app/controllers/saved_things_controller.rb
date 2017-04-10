@@ -1,33 +1,11 @@
 class SavedThingsController < ApplicationController
   def index
-    # @saved_things = current_user.saved_things
-    @after, @saved_things = collect_saved_things
+    @saved_things = current_user.saved_things
   end
   
-  def collect_saved_things
-    session = create_reddit_session
-    
-    saved_things = []
-    
-    after = nil
-    
-    #loop do
-      # Get all posts after the posts in the `after` variable
-      results = session.me.saved(:after => after, :limit => 100)
-      
-      # Store the fetched results
-      saved_things.concat(results)
-      
-      # Keep track of what post to get the saved posts after
-      p results.after
-      after = results.after
-      
-      #break if after.nil?
-    #end
-    
-    p saved_things.first
-    
-    [ results.after, saved_things ]
+  def collect
+    CollectSavedThingsJob.perform_later(current_user)
+    redirect_to saved_things_path
   end
 
   def unsave_thing

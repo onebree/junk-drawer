@@ -21,36 +21,8 @@ class ApplicationController < ActionController::Base
   def current_user
     User.find_by(:id => session["user_id"])
   end
-  
-  def create_reddit_session
-    # TODO - handle dev login
-    
-    strategy = Redd::AuthStrategies::Web.new(
-      :client_id    => ENV["REDDIT_KEY"],
-      :redirect_uri => ENV["REDDIT_REDIRECT_URI"],
-      :secret       => ENV["REDDIT_SECRET"],
-    )
-    
-    client = Redd::APIClient.new(strategy)
-    
-    client.access = Redd::Models::Access.new(
-      strategy,
-      :access_token => current_user.access_token
-    )
-    
-    session = Redd::Models::Session.new(client)
-    
-    Rails.logger.info session
-    
-    session
-  end
-  
-  def create_developer_session
-    # TODO
-  end
 
   helper_method :current_user
-  helper_method :create_reddit_session
 
   private
 

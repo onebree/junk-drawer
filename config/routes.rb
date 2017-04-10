@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   get "/" => "home#index", :as => :home
 
-  get 'saved_things/search'
+  # get 'saved_things/search'
+  
+  get "/collect" => "saved_things#collect", :as => :collect_saved_things
 
   get "/auth/logout" => "sessions#destroy", :as => :logout
   get "/auth/failure" => "sessions#failure"
