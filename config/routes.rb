@@ -2,8 +2,6 @@ Rails.application.routes.draw do
   root "home#index"
 
   get "/" => "home#index", :as => :home
-
-  # get 'saved_things/search'
   
   get "/collect" => "saved_things#collect", :as => :collect_saved_things
 

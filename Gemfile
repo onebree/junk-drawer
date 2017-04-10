@@ -39,7 +39,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'slim'
 gem 'bootstrap-sass'
 gem 'redd'
-gem 'textacular'
 gem 'font-awesome-sass'
 
 group :development, :test do
