@@ -10,20 +10,16 @@ class CollectSavedThingsJob < ApplicationJob
     
     #loop do
       # Get all posts after the posts in the `after` variable
-      results = session.me.saved(:after => after, :limit => 100)
+      results = session.me.saved(:after => after, :limit => 10)
+            
+      Rails.logger.info results.first.to_h
       
-      # Store the fetched results
-      saved_things.concat(results)
+      raise
       
-      # Keep track of what post to get the saved posts after
-      after = results.after
+      Rails.logger.info JSON.parse(results)
       
-      #break if after.nil?
-    #end
-    
-    p saved_things.first
-  
-    raise
+      raise
+      #return
   end
 
   private
@@ -34,7 +30,7 @@ class CollectSavedThingsJob < ApplicationJob
     strategy = Redd::AuthStrategies::Web.new(
       :client_id    => ENV["REDDIT_KEY"],
       :redirect_uri => ENV["REDDIT_REDIRECT_URI"],
-      :secret       => ENV["REDDIT_SECRET"],
+      :secret       => ENV["REDDIT_SECRET"]
     )
     
     client = Redd::APIClient.new(strategy)

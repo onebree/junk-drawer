@@ -4,7 +4,7 @@ class SavedThingsController < ApplicationController
   end
   
   def collect
-    CollectSavedThingsJob.perform_later(current_user)
+    CollectSavedThingsJob.perform_now(current_user)
     redirect_to saved_things_path
   end
 
