@@ -10,23 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170410185119) do
+ActiveRecord::Schema.define(version: 20170417234552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "saved_things", force: :cascade do |t|
-    t.string   "type"
-    t.string   "reddit_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "comments", force: :cascade do |t|
+    t.text "body_html"
+    t.text "link_author"
+    t.text "link_id"
+    t.text "link_title"
+    t.text "link_url"
+  end
+
+  create_table "links", force: :cascade do |t|
+    t.text     "title"
+    t.text     "url"
     t.text     "permalink"
-    t.text     "link_url"
-    t.text     "link_title"
-    t.text     "link_id"
-    t.text     "body"
-    t.string   "subreddit"
+    t.text     "selftext_html"
+    t.text     "thumbnail"
+    t.json     "media"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "saved_things", force: :cascade do |t|
+    t.string   "name"
     t.string   "kind"
+    t.string   "reddit_id"
+    t.string   "subreddit"
+    t.string   "author"
+    t.string   "actable_type"
+    t.integer  "actable_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["actable_type", "actable_id"], name: "index_saved_things_on_actable_type_and_actable_id", using: :btree
   end
 
   create_table "user_saved_things", force: :cascade do |t|
