@@ -5,8 +5,7 @@ Rails.application.routes.draw do
   
   get "/collect" => "saved_things#collect", :as => :collect_saved_things
 
-  get "/auth/logout"   => "sessions#destroy",  :as => :logout
-  get "/auth/failure"  => "sessions#failure",  :as => :failure
+  get "/logout"   => "sessions#destroy",  :as => :logout
   get "/redirect" => "sessions#redirect", :as => :redirect
   
   resources :saved_things, :only => [:index]

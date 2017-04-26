@@ -1,13 +1,13 @@
 class SessionsController < ApplicationController
-  skip_before_action :verify_authenticity_token, :only => :create
-  skip_before_action :auth_required, :only => [:redirect]
+  skip_before_action :verify_authenticity_token, :only => [:redirect]
+  skip_before_action :auth_required
   
   def redirect
-    if request.env["redd.session"].nil?
-      redirect_to failure_path
-    else
+    if request.env['redd.error'].nil?
       user = find_or_create_user
       redirect_to saved_things_path
+    else
+      render_failure(request.env['redd.error'].message)
     end
   end
 
@@ -15,10 +15,6 @@ class SessionsController < ApplicationController
     request.env.delete("redd.session")
     session.delete("user_id")
     redirect_to home_path
-  end
-
-  def failure
-    render :plain => "Reddit auth failed. Check logs for details."
   end
 
   private
@@ -30,5 +26,21 @@ class SessionsController < ApplicationController
     )
 
     session["user_id"] = user.id
+  end
+
+  def render_failure(error)
+    Rails.logger.error "Error while logging in!"
+
+    message =
+      case error
+      when "access_denied"
+        "Sorry, you clicked decline. <a href='/login'>Login again?</a>"
+      when "invalid_state"
+        "Did you login through our website? <a href='/login'>(No)</a>"
+      else
+        "Reddit auth failed. Check logs for details."
+    end
+
+    render :html => message.html_safe
   end
 end

@@ -6,4 +6,4 @@ Rails.application.config.middleware.use Redd::Middleware,
   :secret       => ENV["REDDIT_SECRET"],
   :redirect_uri => ENV["REDIRECT_URI"],
   :scope        => %w(identity save history),
-  :via          => "/auth/reddit"
+  :via          => "/login"

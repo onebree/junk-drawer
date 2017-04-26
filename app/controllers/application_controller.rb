@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   def auth_required
     unless current_user.present? && current_auth.present?
-      redirect_to "/auth/reddit"
+      redirect_to "/login"
     end
   end
 
