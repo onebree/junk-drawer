@@ -3,13 +3,14 @@
     .cover-container
       .masthead.clearfix
         .inner
-          h3.masthead-brand junk drawer
+          h3.masthead-brand
+            = link_to "junk drawer", home_path
           nav
             ul.nav.masthead-nav
               li.active
                 = link_to "Home", home_path
               li
-                = link_to "Sign in", saved_things_path
+                = link_to "Saved things", saved_things_path
               li
                 a href="//github.com/onebree/junk-drawer" Source
               li
@@ -18,18 +19,19 @@
         h1.cover-heading junk drawer for reddit
         p.lead finally organize all your saved junk from reddit
         
-        / Placeholder form until devise-invitable is setup
-        form class="form-inline"
-          .form-group
-            input type="email" class="form-control" placeholder="Email" style="margin-right: 5px;"
-          input type="hidden" value="Request access for junk-drawer"
-          button type="submit" class="btn btn-primary" Request invite
+        /
+          / Placeholder form until devise-invitable is setup
+          form class="form-inline"
+            .form-group
+              input type="email" class="form-control" placeholder="Email" style="margin-right: 5px;"
+            input type="hidden" value="Request access for junk-drawer"
+            button type="submit" class="btn btn-primary" Request invite
 
       .mastfoot
         .inner
           p
             | Made with love by 
-            a href="//github.com/onebree" @onebree
+            a class="github" href="//github.com/onebree" @onebree
 
 css:
   html,
@@ -40,6 +42,22 @@ css:
   body {
     color: #fff;
     text-align: center;
+  }
+
+  h3.masthead-brand > a,
+  a.github {
+    padding-bottom: 10px;
+    text-decoration: none;
+    color: #fff;
+    border-bottom: 2px solid transparent;
+  }
+
+  h3.masthead-brand > a:hover,
+  h3.masthead-brand > a:focus,
+  a.github:hover,
+  a.github:focus {
+    background-color: transparent;
+    border-bottom-color: #fff;
   }
 
   /* Extra markup and styles for table-esque vertical and horizontal centering */
@@ -77,29 +95,61 @@ css:
   .masthead-nav > li {
     display: inline-block;
   }
-  .masthead-nav > li + li {
-    margin-left: 20px;
+  .masthead-nav > li {
+    margin-right: 20px;
+  }
+  .masthead-nav > li:last-child {
+    margin-right: 0px;
   }
   .masthead-nav > li > a {
     padding-right: 0;
     padding-left: 0;
     font-size: 16px;
     font-weight: bold;
-    color: #fff; /* IE8 proofing */
-    color: rgba(255,255,255,.75);
+    color: #fff;
     border-bottom: 2px solid transparent;
   }
   .masthead-nav > li > a:hover,
   .masthead-nav > li > a:focus {
     background-color: transparent;
     border-bottom-color: #a9a9a9;
-    border-bottom-color: rgba(255,255,255,.25);
   }
   .masthead-nav > .active > a,
   .masthead-nav > .active > a:hover,
   .masthead-nav > .active > a:focus {
     color: #fff;
     border-bottom-color: #fff;
+  }
+
+  .cover {
+    padding: 0 20px;
+  }
+
+  .mastfoot {
+    color: #999;
+  }
+
+  @media (min-width: 320px) {
+    /* Pull out the header and footer */
+    .masthead {
+      position: fixed;
+      top: 0;
+    }
+    .mastfoot {
+      position: fixed;
+      bottom: 0;
+    }
+    /* Start the vertical centering */
+    .site-wrapper-inner {
+      vertical-align: middle;
+    }
+
+    /* Handle the widths */
+    .masthead,
+    .mastfoot,
+    .cover-container {
+      width: 100%; /* Must be percentage or pixels for horizontal alignment */
+    }
   }
 
   @media (min-width: 768px) {
@@ -109,23 +159,7 @@ css:
     .masthead-nav {
       float: right;
     }
-  }
 
-  .cover {
-    padding: 0 20px;
-  }
-  .cover .btn-lg {
-    padding: 10px 20px;
-    font-weight: bold;
-  }
-
-  .mastfoot {
-    color: #999; /* IE8 proofing */
-    color: rgba(255,255,255,.5);
-  }
-
-
-  @media (min-width: 768px) {
     /* Pull out the header and footer */
     .masthead {
       position: fixed;
