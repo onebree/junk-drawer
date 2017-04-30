@@ -6,7 +6,7 @@ class SavedThingsController < ApplicationController
   def collect
     CollectSavedThingsJob.perform_now(
       current_user,
-      session["redd_session"]["access_token"]
+      current_auth.client.access.access_token
     )
     redirect_to saved_things_path
   end

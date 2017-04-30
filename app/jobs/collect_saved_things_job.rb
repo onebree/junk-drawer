@@ -4,11 +4,10 @@ class CollectSavedThingsJob < ApplicationJob
   queue_as :default
 
   def perform(user, access_token)
-    raise
-
     # TODO - Following code is WIP
 
     strategy = Redd::AuthStrategies::Web.new(
+      :user_agent   => "Ruby:Redd:junk-drawer (by /u/1bree)",
       :client_id    => ENV["REDDIT_KEY"],
       :secret       => ENV["REDDIT_SECRET"],
       :redirect_uri => ENV["REDIRECT_URI"]
@@ -22,14 +21,14 @@ class CollectSavedThingsJob < ApplicationJob
     )
 
     session = Redd::Models::Session.new(client)
-
+        
     saved_things = []
 
     after = nil
 
     loop do
       # Get all posts after the posts in the `after` variable
-      results = session.me.saved(:after => after, :limit => 100)
+      results = session.me.saved(:after => after, :limit => 10)
 
       # Store the fetched results
       saved_things.concat(results)
@@ -39,6 +38,10 @@ class CollectSavedThingsJob < ApplicationJob
 
       break if after.nil?
     end
+
+    raise
+
+    Rails.logger.info saved_things.first
 
     # TODO
     saved_things.each do |thing|
