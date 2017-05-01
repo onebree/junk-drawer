@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token, :only => [:redirect]
   skip_before_action :auth_required
-  
+
   def redirect
     if request.env['redd.error'].nil?
       user = find_or_create_user
@@ -20,10 +20,14 @@ class SessionsController < ApplicationController
   private
 
   def find_or_create_user
+    reddit = request.env["redd.session"]
+
     user = User.find_or_create_by(
-      :uid  => current_auth.me.id,
-      :name => current_auth.me.name
+      :uid  => reddit.me.id,
+      :name => reddit.me.name
     )
+
+    user.update_attributes(:access_token => reddit.client.access.access_token)
 
     session["user_id"] = user.id
   end

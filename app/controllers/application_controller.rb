@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   USERS = { ENV["JUNK_DRAWER_USERNAME"] => ENV["JUNK_DRAWER_PASSWORD"] }
 
   def auth_required
-    unless current_user.present? && current_auth.present?
+    unless current_user.present? && request.env["redd.session"].present?
       redirect_to "/login"
     end
   end
@@ -18,12 +18,7 @@ class ApplicationController < ActionController::Base
     User.find_by(:id => session["user_id"])
   end
 
-  def current_auth
-    request.env["redd.session"]
-  end
-
   helper_method :current_user
-  helper_method :current_auth
 
   private
 
