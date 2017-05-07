@@ -38,7 +38,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'slim'
 gem 'bootstrap-sass'
-gem 'redd'
+gem 'redd', :github => "avinashbot/redd"
 gem 'font-awesome-sass'
 gem 'active_record-acts_as'
 

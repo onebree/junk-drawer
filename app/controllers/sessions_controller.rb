@@ -27,8 +27,6 @@ class SessionsController < ApplicationController
       :name => reddit.me.name
     )
 
-    user.update_attributes(:access_token => reddit.client.access.access_token)
-
     session["user_id"] = user.id
   end
 
