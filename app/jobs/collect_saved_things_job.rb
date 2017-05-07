@@ -30,7 +30,6 @@ class CollectSavedThingsJob < ApplicationJob
       # Get all posts after the posts in the `after` variable
       results = session.me.saved(:after => after, :limit => 100)
 
-      raise
       # Store the fetched results
       saved_things.concat(results)
 
@@ -52,7 +51,7 @@ class CollectSavedThingsJob < ApplicationJob
       }
 
       if thing.name.starts_with?("t1_")
-        comment = Comment.find_or_create_by(
+        saved_thing = Comment.find_or_initialize_by(
           attributes.merge({
             :body_html   => thing.body_html,
             :link_author => thing.link_author,
@@ -61,10 +60,8 @@ class CollectSavedThingsJob < ApplicationJob
             :link_url    => thing.link_url
           })
         )
-
-        user.comments.push(comment)
-      elsif thing.name.starts_with("t3_")
-        link = Link.find_or_create_by(
+      elsif thing.name.starts_with?("t3_")
+        saved_thing = Link.find_or_initialize_by(
           attributes.merge({
             :title         => thing.title,
             :url           => thing.url,
@@ -73,8 +70,10 @@ class CollectSavedThingsJob < ApplicationJob
             :thumbnail     => thing.thumbnail
           })
         )
+      end
 
-        user.links.push(link)
+      if saved_thing.new_record?
+        user.saved_things << saved_thing
       end
     end
   end

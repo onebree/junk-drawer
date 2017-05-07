@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170417234552) do
+ActiveRecord::Schema.define(version: 20170507221758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,16 +44,9 @@ ActiveRecord::Schema.define(version: 20170417234552) do
     t.integer  "actable_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.index ["actable_type", "actable_id"], name: "index_saved_things_on_actable_type_and_actable_id", using: :btree
-  end
-
-  create_table "user_saved_things", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "saved_thing_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.index ["saved_thing_id"], name: "index_user_saved_things_on_saved_thing_id", using: :btree
-    t.index ["user_id"], name: "index_user_saved_things_on_user_id", using: :btree
+    t.index ["actable_type", "actable_id"], name: "index_saved_things_on_actable_type_and_actable_id", using: :btree
+    t.index ["user_id"], name: "index_saved_things_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,6 +56,4 @@ ActiveRecord::Schema.define(version: 20170417234552) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "user_saved_things", "saved_things"
-  add_foreign_key "user_saved_things", "users"
 end
