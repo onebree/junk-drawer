@@ -1,0 +1,14 @@
+.panel.panel-default
+  .panel-heading
+    = link.title
+    .pull-right
+      = link_to icon("external-link fw"), link.url
+  .panel-body
+    - if link.selftext_html.present?
+      = sanitize(link.selftext_html)
+      hr
+    small
+      ul.list-inline
+        li= link_to "u/#{link.author}", "//reddit.com/u/#{link.author}/"
+        li= link_to link.subreddit, link.subreddit_url
+        li= link_to "permalink", link.reddit_permalink

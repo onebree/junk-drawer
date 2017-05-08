@@ -1,6 +1,8 @@
 class SavedThingsController < ApplicationController
   def index
-    @saved_things = current_user.saved_things
+    @subreddits = current_user.saved_things
+      .order(:subreddit)
+      .group_by(&:subreddit)
   end
 
   def collect

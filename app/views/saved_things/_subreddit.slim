@@ -1,0 +1,15 @@
+.subreddit data-name="#{subreddit}"
+  .panel.panel-default
+    .panel-body
+      .pull-right
+        = icon("caret-square-o-down", :class => "fa-fw fa-lg", "data-subreddit" => subreddit)
+      big(style="margin: 0px;")= "#{subreddit} (#{things.count})"
+
+  .things style="display: none;"
+    .panel-group
+      - things.each do |thing|
+        - case thing.actable_type
+        - when "Comment"
+          = render :partial => "comment", :locals => { :comment => thing.specific }
+        - when "Link"
+          = render :partial => "link", :locals => { :link => thing.specific }

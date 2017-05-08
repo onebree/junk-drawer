@@ -10,7 +10,10 @@
               li.active
                 = link_to "Home", home_path
               li
-                = link_to "Saved things", saved_things_path
+                - if current_user && request.env["redd.session"].present?
+                  = link_to "Saved things", saved_things_path
+                - else
+                  = link_to "Saved Things", "/login"
               li
                 a href="//github.com/onebree/junk-drawer" Source
               li

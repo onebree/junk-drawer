@@ -1,11 +1,12 @@
 .panel.panel-default
   .panel-heading
-    = thing.link_title
+    = comment.link_title
     .pull-right
-      = link_to icon("external-link fw"), thing.link_url
+      = link_to icon("external-link fw"), comment.link_url
   .panel-body
-    = sanitize(thing.body)
+    = sanitize(comment.body_html)
+    hr
     small
       ul.list-inline
-        li= link_to "r/#{thing.subreddit}", thing.subreddit_url
-        li= link_to "permalink", thing.permalink
+        li= link_to comment.subreddit, comment.subreddit_url
+        li= link_to "permalink", comment.reddit_permalink

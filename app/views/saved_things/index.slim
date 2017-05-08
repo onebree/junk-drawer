@@ -1,7 +1,44 @@
-h1 Hello
+css:
+  ul.list-inline {
+    margin-bottom: 0px;
+  }
 
-= link_to "Sync", collect_saved_things_path
+  .panel-body .md p:last-child {
+    margin-bottom: 0px;
+  }
 
-p Your saved things will show up soon.
+  .panel-body hr {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
 
-p= @saved_things.count
+.page-header style="margin-top: 0px;"
+  .pull-right= link_to "Sync", collect_saved_things_path, :class => "btn btn-primary"
+  h1 Saved things
+
+.subreddits
+  - @subreddits.each do |subreddit, things|
+    = render :partial => "subreddit", :locals => { :subreddit => subreddit, :things => things }
+
+javascript:
+  function toggleThingsContent() {
+    const subreddit = this.dataset.subreddit;
+    const $panel = $(`.subreddit[data-name='${subreddit}'] .panel.panel-default`);
+    const $things = $(`.subreddit[data-name='${subreddit}'] .things`);
+
+    if (this.classList.contains('fa-caret-square-o-down')) {
+      $things.show();
+      $panel.css('margin-bottom', '5px');
+      this.classList.remove('fa-caret-square-o-down');
+      this.classList.add('fa-caret-square-o-up');
+    } else {
+      $things.hide();
+      $panel.css('margin-bottom', '20px');
+      this.classList.remove('fa-caret-square-o-up');
+      this.classList.add('fa-caret-square-o-down');
+    }
+  }
+
+  document.querySelectorAll('.pull-right .fa[data-subreddit]').forEach(
+    icon => icon.addEventListener('click', toggleThingsContent)
+  );
