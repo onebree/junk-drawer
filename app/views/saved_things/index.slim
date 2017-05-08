@@ -17,6 +17,8 @@ css:
   h1 Saved things
 
 .subreddits
+  - if @subreddits.empty?
+    big Please click "Sync" to start!
   - @subreddits.each do |subreddit, things|
     = render :partial => "subreddit", :locals => { :subreddit => subreddit, :things => things }
 
